@@ -1,19 +1,42 @@
+import { deleteCyclistRequest } from "../fetch-facade.js";
+
 export function renderCyclists(data) {
     data.then(cyclists => {
         const rows = createTableRows(cyclists);
         const tableElement = document.getElementById("get-cyclists-tbl");
-        tableElement.innerHTML = rows
+        rows.forEach(row =>  tableElement.appendChild(row));
     })
 }
 
 function createTableRows(cyclists) {
-    const rows = cyclists.map(cyclistDto =>
-        `
-        <tr>
-            <td> ${cyclistDto.firstName}</td>
-            <td> ${cyclistDto.lastName}</td>
-            <td> ${cyclistDto.teamName}</td> 
-        </tr>       
-        `).join("\n")
-    return rows;
+    return sortAlphabetically(cyclists).map(cyclistDto => createTableRow(cyclistDto))
+}
+
+function createTableRow(cyclist) {
+    const rowTemplate = document.getElementById("cyclist-row-template")
+    const clonedTemplate = rowTemplate.content.cloneNode(true);
+    const tdNodes = clonedTemplate.querySelectorAll("td");
+    tdNodes.forEach(td => updateNode(td, cyclist));
+    return clonedTemplate;
+}
+
+function updateNode(td, cyclist){
+    if(td.id.includes('edit')) {
+        td.firstElementChild.setAttribute("href", `#/edit-cyclist/${cyclist.id}`)
+    } else if(td.id.includes('delete')) {
+        td.addEventListener('click',  function(){
+            handleDeleteClick(cyclist.id)
+        })
+    } else {
+        td.textContent = cyclist[td.id];
+    }
+}
+
+function handleDeleteClick(cyclistId) {
+    deleteCyclistRequest(cyclistId)
+        .then(() => console.log('delete', cyclistId))
+}
+
+export function sortAlphabetically(cyclists) {
+    return cyclists.sort((a,b) => a.lastName.localeCompare(b.lastName))
 }

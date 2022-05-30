@@ -7,7 +7,7 @@ import {
 import { getAllCyclists, getAllTeams } from "./fetch-facade.js";
 
 import { renderTeams } from "./pages/show-teams.js"
-import { addCyclistHandler, initiateTeamDropdown } from "./pages/add-cyclist.js"
+import { addCyclistHandler, initiateTeamDropdown, initiateCyclist, editCyclistHandler } from "./pages/add-cyclist.js"
 import { renderCyclists } from "./pages/show-cyclists.js";
 
 
@@ -37,5 +37,12 @@ window.addEventListener("load", async () => {
         .on("/show-cyclists", () => {
             renderTemplate(templateShowCyclists, "content")
             renderCyclists(getAllCyclists())
+        })
+        .on("/edit-cyclist/:cyclistId", (navigoMatch) => {
+            renderTemplate(templateAddCyclist, "content")
+            const cId = navigoMatch.data.cyclistId
+            initiateCyclist(cId)
+            initiateTeamDropdown()
+            editCyclistHandler(cId)
         })
 })
