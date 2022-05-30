@@ -1,7 +1,6 @@
 import { SERVER_URL } from "../../settings.js"
 
-export const renderEntities = async () => await fetch(`${SERVER_URL}entities`, makeOptions("get")).then(res => handleErrors(res))
-export const renderEntity = async (id) => await fetch(`${SERVER_URL}entities/${id}`, makeOptions("get")).then(res => handleErrors(res))
+export const getAllTeams = async () => await fetch(`${SERVER_URL}teams`, makeOptions("get")).then(res => handleErrors(res))
 
 export function makeOptions(method, body, addToken) {
     const opts = {
