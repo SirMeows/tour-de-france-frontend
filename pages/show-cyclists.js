@@ -9,7 +9,7 @@ export function renderCyclists(data) {
 }
 
 function createTableRows(cyclists) {
-    return cyclists.map(cyclistDto => createTableRow(cyclistDto))
+    return sortAlphabetically(cyclists).map(cyclistDto => createTableRow(cyclistDto))
 }
 
 function createTableRow(cyclist) {
@@ -35,4 +35,8 @@ function updateNode(td, cyclist){
 function handleDeleteClick(cyclistId) {
     deleteCyclistRequest(cyclistId)
         .then(() => console.log('delete', cyclistId))
+}
+
+export function sortAlphabetically(cyclists) {
+    return cyclists.sort((a,b) => a.lastName.localeCompare(b.lastName))
 }
