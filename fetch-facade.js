@@ -1,8 +1,8 @@
 import { SERVER_URL } from "../../settings.js"
 
 export const getAllTeams = async () => await fetch(`${SERVER_URL}teams`, makeOptions("get")).then(res => handleErrors(res))
-export const getAllCyclists = async () => await fetch(`${SERVER_URL}cyclists`, makeOptions("get")).then(res => handleErrors(res))
 export const addCyclistRequest = async (id, cyclistDto) => await fetch(`${SERVER_URL}teams/${id}/cyclist`, makeOptions("post", cyclistDto)).then(res => handleErrors(res))
+export const getAllCyclists = async () => await fetch(`${SERVER_URL}cyclists`, makeOptions("get")).then(res => handleErrors(res))
 
 export function makeOptions(method, body, addToken) {
     const opts = {
