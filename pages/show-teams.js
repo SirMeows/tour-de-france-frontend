@@ -1,8 +1,5 @@
-import { getAllTeams } from "../fetch-facade.js"
-
-export function renderTeams() {
-    getAllTeams()
-        .then(teams => {
+export function renderTeams(data) {
+    data.then(teams => {
             renderRows(teams)
         })
 }
