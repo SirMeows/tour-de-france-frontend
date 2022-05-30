@@ -4,7 +4,7 @@ import {
     loadTemplate, adjustForMissingHash, renderTemplate, setActiveLink
 } from "./utils.js"
 
-import { getAllCyclists, getAllTeams } from "./fetch-facade.js";
+import {getAllCyclists, getAllTeams, getCyclistsByTeam} from "./fetch-facade.js";
 
 import { renderTeams } from "./pages/show-teams.js"
 import { addCyclistHandler, initiateTeamDropdown, initiateCyclist, editCyclistHandler } from "./pages/add-cyclist.js"
@@ -38,6 +38,11 @@ window.addEventListener("load", async () => {
             renderTemplate(templateShowCyclists, "content")
             renderCyclists(getAllCyclists())
         })
+        .on("/show-cyclists-by-team/:teamId", (navigoMatch) => {
+            renderTemplate(templateShowCyclists, "content")
+            renderCyclists(getCyclistsByTeam(navigoMatch.data.teamId))
+        })
+
         .on("/edit-cyclist/:cyclistId", (navigoMatch) => {
             renderTemplate(templateAddCyclist, "content")
             const cId = navigoMatch.data.cyclistId

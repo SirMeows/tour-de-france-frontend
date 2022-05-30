@@ -1,16 +1,21 @@
 <template>
-    <h2>Save Cyclist</h2>
+    <h2 class="m-3">Save Cyclist</h2>
     <form>
-        <div className="form-group">
+        <div class="m-3 form-group">
             <label htmlFor="firstName-input">First name</label>
-            <input type="text" className="form-control" id="firstName-input" placeholder="Write first name here">
+            <input type="text" class="form-control" id="firstName-input" placeholder="Write first name here">
+        </div>
+        <div class="m-3 form-group">
             <label htmlFor="lastName-input">Last name</label>
-            <input type="text" className="form-control" id="lastName-input" placeholder="Write last name here">
+            <input type="text" class="form-control" id="lastName-input" placeholder="Write last name here">
         </div>
-        <div className="form-group">
+        <div class="m-3 form-group">
             <label htmlFor="team-select-dropdown">Select team</label>
-            <select className="form-control" id="team-select-dropdown"></select>
+            <select class="form-control" id="team-select-dropdown"></select>
         </div>
-        <button type="submit" className="btn btn-outline-dark" id="add-cyclist-btn">Save cyclist</button>
+        <div class="m-3 form-group">
+            <button type="submit" class= "btn btn-outline-dark" id="add-cyclist-btn">Save cyclist</button>
+        </div>
     </form>
 </template>
+
