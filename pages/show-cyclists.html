@@ -5,8 +5,28 @@
             <th scope="col">First Name</th>
             <th scope="col">LastName</th>
             <th scope="col">Team</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
         </tr>
         <tbody id="get-cyclists-tbl">
         </tbody>
     </table>
+</template>
+
+<template id="cyclist-row-template">
+    <tr>
+        <td id="firstName"> </td>
+        <td id="lastName"> </td>
+        <td id="teamName"> </td>
+        <td id="edit-btn">
+            <button type="button" class="btn btn-default btn-lg">
+                <i class="bi bi-pencil-square"></i>
+            </button>
+        </td>
+        <td id="delete-btn">
+            <button type="button" class="btn btn-default btn-lg">
+                <i class="bi bi-trash3"></i>
+            </button>
+        </td>
+    </tr>
 </template>

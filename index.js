@@ -38,4 +38,5 @@ window.addEventListener("load", async () => {
             renderTemplate(templateShowCyclists, "content")
             renderCyclists(getAllCyclists())
         })
+
 })
