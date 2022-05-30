@@ -8,14 +8,11 @@ export function renderCyclists(data) {
 
 function createTableRows(cyclists) {
     const rows = cyclists.map(cyclistDto =>
-        //TODO: Get team name by id
         `
         <tr>
             <td> ${cyclistDto.firstName}</td>
             <td> ${cyclistDto.lastName}</td>
-            <td> </td>
-            
-            
+            <td> ${cyclistDto.teamName}</td> 
         </tr>       
         `).join("\n")
     return rows;
