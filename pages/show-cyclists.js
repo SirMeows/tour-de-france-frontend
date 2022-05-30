@@ -20,25 +20,19 @@ function createTableRow(cyclist) {
     return clonedTemplate;
 }
 
-function updateNode(td, candidate){
+function updateNode(td, cyclist){
     if(td.id.includes('edit')) {
-        td.addEventListener('click', function(){
-            handleEditClick(candidate.id)
-        })
+        td.firstElementChild.setAttribute("href", `#/edit-cyclist/${cyclist.id}`)
     } else if(td.id.includes('delete')) {
         td.addEventListener('click',  function(){
-            handleDeleteClick(candidate.id)
+            handleDeleteClick(cyclist.id)
         })
     } else {
-        td.textContent = candidate[td.id];
+        td.textContent = cyclist[td.id];
     }
 }
 
-function handleEditClick(candidateId) {
-    console.log('edit',candidateId)
-}
-
-function handleDeleteClick(candidateId) {
-    deleteCyclistRequest(candidateId)
-        .then(() => console.log('delete', candidateId))
+function handleDeleteClick(cyclistId) {
+    deleteCyclistRequest(cyclistId)
+        .then(() => console.log('delete', cyclistId))
 }
