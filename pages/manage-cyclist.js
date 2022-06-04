@@ -11,7 +11,7 @@ function renderTeamOptions(teams) {
     const teamOptions =
         teams.map(team => createTeamOption(team)
         ).join("\n")
-    document.getElementById("team-select-dropdown").innerHTML = teamOptions;
+    teamDropdown().innerHTML = teamOptions;
 }
 
 function createTeamOption(team) {
@@ -19,16 +19,14 @@ function createTeamOption(team) {
 }
 
 export function addCyclistHandler() {
-    document.getElementById("add-cyclist-btn").onclick = createNewCyclist;
+    addCyclistBtn().onclick = createNewCyclist;
 }
 
 const createNewCyclist = async () => {
-    const teamDropdown = document.getElementById("team-select-dropdown");
-    const teamId = teamDropdown.value;
-
+    const teamId = teamIdVal()
     const cyclistDto = {
-        firstName: document.getElementById("firstName-input").value,
-        lastName: document.getElementById("lastName-input").value,
+        firstName: fNameInputVal(),
+        lastName: lNameInputVal(),
         teamId: teamId
     }
     const req = await addCyclistRequest(teamId, cyclistDto)
@@ -36,29 +34,45 @@ const createNewCyclist = async () => {
 }
 
 export function editCyclistHandler(cyclistId) {
-    document.getElementById("add-cyclist-btn").onclick = function() {
+    addCyclistBtn().onclick = function() {
         editCyclist(cyclistId);
     }
 }
 
 const editCyclist = async (cyclistId) => {
-    const teamDropdown = document.getElementById("team-select-dropdown");
-    const teamId = teamDropdown.value;
-
-    const cyclistDto = {
+ const cyclistDto = {
         id: cyclistId,
-        firstName: document.getElementById("firstName-input").value,
-        lastName: document.getElementById("lastName-input").value,
-        teamId: teamId
+        firstName: fNameInputVal(),
+        lastName: lNameInputVal(),
+        teamId: teamIdVal()
     }
-    const req = await editCyclistRequest(cyclistDto)
-    console.log(JSON.stringify(req))
+    await editCyclistRequest(cyclistDto)
 }
 
 export function initiateCyclist(cyclistId) {
-    const cyclist = getCyclistById(cyclistId)
+    getCyclistById(cyclistId)
         .then(cyclist => {
             document.getElementById("firstName-input").value = cyclist.firstName
             document.getElementById("lastName-input").value = cyclist.lastName
         })
+}
+
+function fNameInputVal() {
+    return document.getElementById("firstName-input").value
+}
+
+function lNameInputVal() {
+    return document.getElementById("lastName-input").value
+}
+
+function teamIdVal() {
+    return teamDropdown().value
+}
+
+function teamDropdown() {
+    return document.getElementById("team-select-dropdown")
+}
+
+function addCyclistBtn() {
+    return document.getElementById("add-cyclist-btn")
 }
