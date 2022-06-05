@@ -39,4 +39,5 @@ export async function handleErrors(res) {
         const error = new Error(errorResponse.error)
         throw error
     }
+    return res
 }

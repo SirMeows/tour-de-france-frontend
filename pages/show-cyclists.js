@@ -24,7 +24,7 @@ function updateNode(td, cyclist){
     if(td.id.includes('edit')) {
         td.firstElementChild.setAttribute("href", `#/edit-cyclist/${cyclist.id}`)
     } else if(td.id.includes('delete')) {
-        td.addEventListener('click',  function(){
+        td.addEventListener('click',  function() {
             handleDeleteClick(cyclist.id)
         })
     } else {
@@ -34,7 +34,7 @@ function updateNode(td, cyclist){
 
 function handleDeleteClick(cyclistId) {
     deleteCyclistRequest(cyclistId)
-        .then(() => console.log('delete', cyclistId))
+    //TODO: Redirect to Show Cyclists page
 }
 
 export function sortAlphabetically(cyclists) {

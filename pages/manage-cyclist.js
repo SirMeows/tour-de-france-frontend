@@ -1,5 +1,7 @@
 import { addCyclistRequest, getAllTeams, editCyclistRequest, getCyclistById } from "../fetch-facade.js";
 
+// Team Dropdown
+
 export function initiateTeamDropdown() {
     getAllTeams()
         .then(teams => {
@@ -11,12 +13,14 @@ function renderTeamOptions(teams) {
     const teamOptions =
         teams.map(team => createTeamOption(team)
         ).join("\n")
-    teamDropdown().innerHTML = teamOptions;
+    teamDropdownElm().innerHTML = teamOptions;
 }
 
 function createTeamOption(team) {
     return `<option value="${team.id}"> ${team.name} </option>`
 }
+
+// Add Cyclist
 
 export function addCyclistHandler() {
     addCyclistBtn().onclick = createNewCyclist;
@@ -29,24 +33,16 @@ const createNewCyclist = async () => {
         lastName: lNameInputVal(),
         teamId: teamId
     }
-    const req = await addCyclistRequest(teamId, cyclistDto)
-    console.log(JSON.stringify(req))
+    await addCyclistRequest(teamId, cyclistDto)
+    //TODO: Redirect to Show Cyclists page
 }
+
+// Edit Cyclist
 
 export function editCyclistHandler(cyclistId) {
     addCyclistBtn().onclick = function() {
         editCyclist(cyclistId);
     }
-}
-
-const editCyclist = async (cyclistId) => {
- const cyclistDto = {
-        id: cyclistId,
-        firstName: fNameInputVal(),
-        lastName: lNameInputVal(),
-        teamId: teamIdVal()
-    }
-    await editCyclistRequest(cyclistDto)
 }
 
 export function initiateCyclist(cyclistId) {
@@ -57,6 +53,19 @@ export function initiateCyclist(cyclistId) {
         })
 }
 
+const editCyclist = async (cyclistId) => {
+ const cyclistDto = {
+        id: cyclistId,
+        firstName: fNameInputVal(),
+        lastName: lNameInputVal(),
+        teamId: teamIdVal()
+    }
+    await editCyclistRequest(cyclistDto)
+    //TODO: Redirect to Show Cyclists page
+}
+
+// Elements and Element values
+
 function fNameInputVal() {
     return document.getElementById("firstName-input").value
 }
@@ -66,10 +75,10 @@ function lNameInputVal() {
 }
 
 function teamIdVal() {
-    return teamDropdown().value
+    return teamDropdownElm().value
 }
 
-function teamDropdown() {
+function teamDropdownElm() {
     return document.getElementById("team-select-dropdown")
 }
 
