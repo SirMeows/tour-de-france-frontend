@@ -1,4 +1,4 @@
-import { deleteCyclistRequest } from "../fetch-facade.js";
+import { handleDeleteClick } from "./manage-cyclist.js"
 
 export function renderCyclists(data) {
     data.then(cyclists => {
@@ -22,19 +22,15 @@ function createTableRow(cyclist) {
 
 function updateNode(td, cyclist){
     if(td.id.includes('edit')) {
-        td.firstElementChild.setAttribute("href", `#/edit-cyclist/${cyclist.id}`)
+        let aTag = td.firstElementChild
+        aTag.setAttribute("href", `#/edit-cyclist/${cyclist.id}`)
     } else if(td.id.includes('delete')) {
-        td.addEventListener('click',  function(){
+        td.addEventListener('click',  function() {
             handleDeleteClick(cyclist.id)
         })
     } else {
         td.textContent = cyclist[td.id];
     }
-}
-
-function handleDeleteClick(cyclistId) {
-    deleteCyclistRequest(cyclistId)
-        .then(() => console.log('delete', cyclistId))
 }
 
 export function sortAlphabetically(cyclists) {

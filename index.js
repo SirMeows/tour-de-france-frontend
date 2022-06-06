@@ -7,14 +7,14 @@ import {
 import {getAllCyclists, getAllTeams, getCyclistsByTeam} from "./fetch-facade.js";
 
 import { renderTeams } from "./pages/show-teams.js"
-import { addCyclistHandler, initiateTeamDropdown, initiateCyclist, editCyclistHandler } from "./pages/add-cyclist.js"
+import { addCyclistHandler, initiateTeamDropdown, initiateCyclist, editCyclistHandler } from "./pages/manage-cyclist.js"
 import { renderCyclists } from "./pages/show-cyclists.js";
 
 
 window.addEventListener("load", async () => {
     const router = new Navigo("/", { hash: true })
     const templateShowTeams = await loadTemplate("./pages/show-teams.html")
-    const templateAddCyclist = await loadTemplate("./pages/add-cyclist.html")
+    const templateManageCyclist = await loadTemplate("./pages/manage-cyclist.html")
     const templateShowCyclists = await loadTemplate("./pages/show-cyclists.html")
 
     adjustForMissingHash()
@@ -30,7 +30,7 @@ window.addEventListener("load", async () => {
             renderTeams(getAllTeams())
         })
         .on("/add-cyclist", () => {
-            renderTemplate(templateAddCyclist, "content")
+            renderTemplate(templateManageCyclist, "content")
             initiateTeamDropdown()
             addCyclistHandler()
         })
@@ -44,10 +44,10 @@ window.addEventListener("load", async () => {
         })
 
         .on("/edit-cyclist/:cyclistId", (navigoMatch) => {
-            renderTemplate(templateAddCyclist, "content")
+            renderTemplate(templateManageCyclist, "content")
+            initiateTeamDropdown()
             const cId = navigoMatch.data.cyclistId
             initiateCyclist(cId)
-            initiateTeamDropdown()
             editCyclistHandler(cId)
         })
 })
