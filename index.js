@@ -45,9 +45,9 @@ window.addEventListener("load", async () => {
 
         .on("/edit-cyclist/:cyclistId", (navigoMatch) => {
             renderTemplate(templateManageCyclist, "content")
+            initiateTeamDropdown()
             const cId = navigoMatch.data.cyclistId
             initiateCyclist(cId)
-            initiateTeamDropdown()
             editCyclistHandler(cId)
         })
 })

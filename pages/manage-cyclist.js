@@ -1,4 +1,10 @@
-import { addCyclistRequest, getAllTeams, editCyclistRequest, getCyclistById } from "../fetch-facade.js";
+import {
+    addCyclistRequest,
+    getAllTeams,
+    editCyclistRequest,
+    getCyclistById,
+    deleteCyclistRequest
+} from "../fetch-facade.js";
 
 // Team Dropdown
 
@@ -50,6 +56,7 @@ export function initiateCyclist(cyclistId) {
         .then(cyclist => {
             document.getElementById("firstName-input").value = cyclist.firstName
             document.getElementById("lastName-input").value = cyclist.lastName
+            //TODO: Set correct team to be shown (Currently random)
         })
 }
 
@@ -61,6 +68,13 @@ const editCyclist = async (cyclistId) => {
         teamId: teamIdVal()
     }
     await editCyclistRequest(cyclistDto)
+    //TODO: Redirect to Show Cyclists page
+}
+
+// Delete Cyclist
+
+export function handleDeleteClick(cyclistId) {
+    deleteCyclistRequest(cyclistId)
     //TODO: Redirect to Show Cyclists page
 }
 
