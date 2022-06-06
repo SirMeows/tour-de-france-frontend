@@ -8,7 +8,7 @@ export const editCyclistRequest = async (cyclistDto) => await fetch(`${SERVER_UR
 export const getCyclistById = async (id) => await fetch(`${SERVER_URL}cyclists/${id}`, makeOptions("get")).then((res) => handleErrorsAndParse(res))
 export const getCyclistsByTeam = async (id) => await fetch(`${SERVER_URL}teams/${id}/members`, makeOptions("get")).then(res => handleErrorsAndParse(res))
 
-export function makeOptions(method, body, addToken) {
+export function makeOptions(method, body) {
     const opts = {
         method: method,
         headers: {
@@ -17,10 +17,6 @@ export function makeOptions(method, body, addToken) {
         }
     }
     if (body) opts.body = JSON.stringify(body) // Add optional body
-    if (addToken) {
-        let jwt = sessionStorage.getItem("token") // Authentication
-        if (jwt) opts.headers.Authorization = `Bearer ${jwt}`
-    }
     return opts
 }
 
